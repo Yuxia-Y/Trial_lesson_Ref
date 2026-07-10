@@ -1,37 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://github.com/Yuxia-Y/Trial_lesson_Ref</loc>
+    <loc>https://yuxia-y.github.io/Trial_lesson_Ref/</loc>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://github.com/Yuxia-Y/Trial_lesson_Ref/blob/main/README.md</loc>
+    <loc>https://yuxia-y.github.io/Trial_lesson_Ref/README.md</loc>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://github.com/Yuxia-Y/Trial_lesson_Ref/blob/main/llms.txt</loc>
+    <loc>https://yuxia-y.github.io/Trial_lesson_Ref/llms.txt</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://github.com/Yuxia-Y/Trial_lesson_Ref/blob/main/claude-context-tuner/SKILL.md</loc>
+    <loc>https://yuxia-y.github.io/Trial_lesson_Ref/claude-context-tuner/SKILL.md</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://github.com/Yuxia-Y/Trial_lesson_Ref/blob/main/claude-context-tuner/REFERENCE.md</loc>
+    <loc>https://yuxia-y.github.io/Trial_lesson_Ref/claude-context-tuner/REFERENCE.md</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://github.com/Yuxia-Y/Trial_lesson_Ref/blob/main/claude-context-tuner/EXAMPLES.md</loc>
+    <loc>https://yuxia-y.github.io/Trial_lesson_Ref/claude-context-tuner/EXAMPLES.md</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://github.com/Yuxia-Y/Trial_lesson_Ref/blob/main/sitemap.xml</loc>
+    <loc>https://yuxia-y.github.io/Trial_lesson_Ref/sitemap.xml</loc>
     <changefreq>monthly</changefreq>
     <priority>0.3</priority>
   </url>
