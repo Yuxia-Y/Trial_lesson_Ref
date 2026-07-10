@@ -8,6 +8,9 @@ jobs:
   notify:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - name: Submit changed files to IndexNow
         env:
           KEY: ${{ secrets.INDEXNOW_KEY }}
