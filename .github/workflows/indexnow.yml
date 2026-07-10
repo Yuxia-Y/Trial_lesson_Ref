@@ -1,0 +1,25 @@
+name: IndexNow
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Submit changed files to IndexNow
+        env:
+          KEY: ${{ secrets.INDEXNOW_KEY }}
+        run: |
+          if [ -z "$KEY" ]; then
+            echo "::error::INDEXNOW_KEY secret is not set"
+            exit 1
+          fi
+          changed=$(git diff --name-only HEAD~1 HEAD)
+          for f in $changed; do
+            url="https://yuxia-y.github.io/Trial_lesson_Ref/$f"
+            echo "Submitting: $url"
+            status=$(curl -s -o /dev/null -w "%{http_code}" "https://api.indexnow.org/indexnow?url=$url&key=$KEY")
+            echo "  -> HTTP $status"
+          done
