@@ -1,0 +1,41 @@
+# Trial_lesson_Ref
+
+> Claude Code 上下文优化技能(claude-context-tuner)的公开课参考仓库。
+
+## 入口
+
+- [README.md](./README.md):技能定位、工作流、硬规则
+- [claude-context-tuner/SKILL.md](./claude-context-tuner/SKILL.md):技能入口
+- [claude-context-tuner/REFERENCE.md](./claude-context-tuner/REFERENCE.md):Tier 1/2/3 修复手册
+- [claude-context-tuner/EXAMPLES.md](./claude-context-tuner/EXAMPLES.md):真实项目案例
+- [claude-context-tuner/scripts/diagnose.sh](./claude-context-tuner/scripts/diagnose.sh):启动税诊断
+- [claude-context-tuner/scripts/scan-bloat.sh](./claude-context-tuner/scripts/scan-bloat.sh):膨胀源扫描
+- [claude-context-tuner/scripts/safe-eval.sh](./claude-context-tuner/scripts/safe-eval.sh):长命令自动 tail 包装
+
+## 适用场景
+
+- Claude Code 会话上下文爆了 / 100% 占用 / context 满了
+- 上下文健康检查 / 减负 / 文档太杂
+- memory 文件越积越多,占满 token
+- 启动税 ≥ 20K tokens 的项目
+
+## 一句话总结
+
+跑 `bash claude-context-tuner/scripts/diagnose.sh` 看到 token 拆分,
+再 `bash claude-context-tuner/scripts/scan-bloat.sh` 找到膨胀源,
+按 SKILL.md 的 Tier 1 → 2 → 3 顺序修复。
+
+## 三档修复
+
+- Tier 1(~5 min):memory 清理 + CLAUDE.md 规则 + Bash 输出习惯
+- Tier 2(30-60 min):文档结构改造(CONTEXT.md、operations.md、PRD 切片)
+- Tier 3(半天):自建脚本/别名/Cron/disabledTools 等长期优化
+
+## 硬规则
+
+1. 绝不擅自改用户文件
+2. memory 删叙事型、留规则型
+3. 没重跑 diagnose.sh 不算修好
+4. 路径不硬编码项目
+5. 不动 ~/.claude/plugins/cache/
+6. Tier 顺序 1 → 2 → 3

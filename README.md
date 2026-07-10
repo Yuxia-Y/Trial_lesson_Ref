@@ -2,6 +2,39 @@
 
 我自己专用的公开课参考项目,目前主要用来托管 `claude-context-tuner` 这套上下文优化技能,方便我在公开课上演示与分发。
 
+## TL;DR — Claude Code 上下文爆了怎么办
+
+跑这两条:
+
+```bash
+bash ~/.claude/skills/claude-context-tuner/scripts/diagnose.sh
+bash ~/.claude/skills/claude-context-tuner/scripts/scan-bloat.sh
+```
+
+读输出后按 [SKILL.md 工作流](./claude-context-tuner/SKILL.md)从 Tier 1(5 分钟,清 memory + 写 CLAUDE.md 规则)开始,**不要一上来就重写文档**。
+
+## 常见问题(FAQ)
+
+### Claude Code 上下文爆了 / 100% 满了怎么办?
+
+按 Tier 1 → 2 → 3 顺序修。先跑 `diagnose.sh` 看启动税(CLAUDE.md / CONTEXT.md / memory / 工具 schema 各占多少 token),再 `scan-bloat.sh` 找膨胀源(超大文件、叙事型 memory、重复的大型 tool_result)。Tier 1 通常 5 分钟就能让启动税下降 30% 以上。
+
+### memory 该删哪些,留哪些?
+
+删**叙事型**(日期 + "今天做了什么" + commit/issue 引用)。留**规则型**(平台 gotcha、约束、不显然的踩坑)。判断标准:删了之后 `git log` 和 `gh issue view` 能找回来吗?能就删。
+
+### 多久能见效?
+
+Tier 1 完成后启动税应下降 ≥ 30%。Tier 2 通常 30-60 分钟,Tier 3 半天。
+
+### 这个技能是项目无关的吗?
+
+是。所有路径通过 `git rev-parse --show-toplevel` 或 `~/.claude/CLAUDE.md` 查找,不硬编码任何项目路径。可以直接复制 `claude-context-tuner/` 到任意项目使用。
+
+### 它和 `/si:*`(self-improving-agent)是什么关系?
+
+诊断完会把发现的卫生规则("memory 写规则不写 event log"、"大文件先 Grep 再 Read"、"长 bash 输出套 tail")通过 `/si:promote` 沉淀进项目 `CLAUDE.md`,让本轮发现的规则在后续 session 持续生效。
+
 ---
 
 ## 目录速览
@@ -123,3 +156,56 @@ bash claude-context-tuner/scripts/scan-bloat.sh
 ## License
 
 个人参考项目,使用前请先取得作者许可。
+
+---
+
+## 结构化数据(供搜索引擎和 AI 抓取器读取)
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Claude Code 上下文爆了 / 100% 满了怎么办?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "按 Tier 1 → 2 → 3 顺序修。先跑 diagnose.sh 看启动税(CLAUDE.md / CONTEXT.md / memory / 工具 schema 各占多少 token),再 scan-bloat.sh 找膨胀源(超大文件、叙事型 memory、重复的大型 tool_result)。Tier 1 通常 5 分钟就能让启动税下降 30% 以上。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Claude Code 的 memory 该删哪些,留哪些?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "删叙事型(日期 + 今天做了什么 + commit/issue 引用)。留规则型(平台 gotcha、约束、不显然的踩坑)。判断标准:删了之后 git log 和 gh issue view 能找回来吗?能就删。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "claude-context-tuner 多长时间能见效?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Tier 1 完成后启动税应下降 ≥ 30%。Tier 2 通常 30-60 分钟,Tier 3 半天。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "claude-context-tuner 是项目无关的吗?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "是。所有路径通过 git rev-parse --show-toplevel 或 ~/.claude/CLAUDE.md 查找,不硬编码任何项目路径。可以直接复制 claude-context-tuner/ 到任意项目使用。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "claude-context-tuner 和 self-improving-agent(/si:*) 是什么关系?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "诊断完会把发现的卫生规则(memory 写规则不写 event log、大文件先 Grep 再 Read、长 bash 输出套 tail)通过 /si:promote 沉淀进项目 CLAUDE.md,让本轮发现的规则在后续 session 持续生效。"
+      }
+    }
+  ]
+}
+</script>
